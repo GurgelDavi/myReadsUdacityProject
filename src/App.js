@@ -1,6 +1,7 @@
 import React from 'react'
 import {Route} from 'react-router'
 import Bookshelf from './Bookshelf'
+import SearchBooks from './SearchBooks'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -72,7 +73,6 @@ class BooksApp extends React.Component {
             <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='wantToRead')} shelf={'wantToRead'}/>
             <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='read')} shelf={'Read'}/>
           </div>
-
           <div className="open-search">
             <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
           </div>

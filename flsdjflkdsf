@@ -1,0 +1,47 @@
+[33mcommit 9b10197315c8fc5440ee7b1a5060f5edfd15d1c6[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Tue Mar 6 09:17:55 2018 -0300
+
+    Adcionado botão de busca
+
+[33mcommit d9c27d7cd48d3f113edc38f0c9872e83f1c3c88d[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Mon Mar 5 22:29:57 2018 -0300
+
+    fix thumbnail
+
+[33mcommit 4e7193fe6b183bd3ad09936e5ff25c80630804ca[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Mon Mar 5 21:34:39 2018 -0300
+
+    Adcionado suporte a BooksAPI
+
+[33mcommit f8ab7f5f4fc83a8477443560ad36899a4d5be058[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Mon Mar 5 21:29:39 2018 -0300
+
+    Mudança de categoria adcionada sem a API
+
+[33mcommit aaf16f4eeafb8089ab642d3a455a8576c4052113[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Fri Mar 2 21:25:31 2018 -0300
+
+    iniciando testes com a booksAPI
+
+[33mcommit 9a6e286d2996f67899994e8f7e085bf44b1f5c1f[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Fri Mar 2 20:31:36 2018 -0300
+
+    criação da UI via react
+
+[33mcommit 3d53984a9a10da67f2980787e675d74bc52d2de4[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Tue Feb 27 21:34:25 2018 -0300
+
+    Inseridas regras do gitignore
+
+[33mcommit 39f6177a20d82126317dc15069f7d79caba61c2d[m
+Author: Davi Antunes <davigurgel2@gmail.com>
+Date:   Tue Feb 27 21:19:34 2018 -0300
+
+    First commit
