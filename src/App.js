@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {Route} from 'react-router'
 import Bookshelf from './Bookshelf'
 import SearchBooks from './SearchBooks'
@@ -62,21 +63,30 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <div className="list-books">
-          <div className="list-books-title">
-            <h1>My Reads</h1>
-          </div>
+      <Route exact path="/" render={()=>(
+        <div>
+          <div className="list-books">
+            <div className="list-books-title">
+              <h1>My Reads</h1>
+            </div>
           </div>
           <div className="list-books-top">
-          <div className="list-books-content">
-            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='currentlyReading')} shelf={'currentlyReading'}/>
-            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='wantToRead')} shelf={'wantToRead'}/>
-            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='read')} shelf={'Read'}/>
-          </div>
-          <div className="open-search">
-            <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
+            <div className="list-books-content">
+              <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='currentlyReading')} shelf={'currentlyReading'}/>
+              <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='wantToRead')} shelf={'wantToRead'}/>
+              <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='read')} shelf={'Read'}/>
+            </div>
+            <div className="open-search">
+               <Link to="/searchBook">Add a book</Link>
+            </div>
           </div>
         </div>
+      )}/>
+      <Route path="/searchBook" render={()=>(
+        <div>
+          <SearchBooks/>
+        </div>
+      )}/>
       </div>
     )
   }
