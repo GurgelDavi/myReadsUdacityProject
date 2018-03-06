@@ -7,36 +7,16 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    books :[
-      {
-        "id":"toKillAMockingbird",
-        "title":"To Kill a Mockingbird",
-        "authors":"Harper Lee",
-        "imageLinks":"http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api",
-        "shelf":"currentlyReading"
-      },
-      {
-        "id":"endersGame",
-        "title":"Ender's Game",
-        "authors":"Orson Scott Card",
-        "imageLinks":"http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api",
-        "shelf":"currentlyReading"
-      },
-      {
-        "id":"1776",
-        "title":"1776",
-        "authors":"David McCullough",
-        "imageLinks":"http://books.google.com/books/content?id=uu1mC6zWNTwC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73pGHfBNSsJG9Y8kRBpmLUft9O4BfItHioHolWNKOdLavw-SLcXADy3CPAfJ0_qMb18RmCa7Ds1cTdpM3dxAGJs8zfCfm8c6ggBIjzKT7XR5FIB53HHOhnsT7a0Cc-PpneWq9zX&source=gbs_api",
-        "shelf":"wantToRead"
-      }
-
-    ],
-    showSearchPage: false
+    books :[],
+    showSearchPage: true
   }
   componentDidMount(){
     BooksAPI.getAll().then((books)=>{
       this.setState({books:books})
     })
+  }
+  updateQuery = (query) => {
+    this.setState({ query:query.trim() })
   }
   removeBook = (book) => {
     this.setState(state=>({
@@ -54,7 +34,24 @@ class BooksApp extends React.Component {
           "title":book.title,
           "authors":book.authors,
           "imageLinks":book.imageLinks,
-          "shelf":shelf
+          "shelf":shelf,
+          "publisher":book.publisher,
+          "publishedDate":book.publishedDate,
+          "description":book.description,
+          "industryIdentifiers":book.industryIdentifiers,
+          "readingModes":book.readingModes,
+          "pageCount":book.pageCount,
+          "printType":book.printType,
+          "categories":book.categories,
+          "averageRating":book.averageRating,
+          "ratingsCount":book.ratingsCount,
+          "maturityRating":book.maturityRating,
+          "allowAnonLogging":book.allowAnonLogging,
+          "contentVersion":book.contentVersion,
+          "imageLinks":book.imageLinks,
+          "languagepreviewLink":book.languagepreviewLink,
+          "infoLink":book.infoLink,
+          "canonicalVolumeLink":book.canonicalVolumeLink
         }
       ])
     }))
@@ -66,12 +63,18 @@ class BooksApp extends React.Component {
       <div className="app">
         <div className="list-books">
           <div className="list-books-title">
-            <h1>MyReads</h1>
+            <h1>My Reads</h1>
           </div>
+          </div>
+          <div className="list-books-top">
           <div className="list-books-content">
             <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='currentlyReading')} shelf={'currentlyReading'}/>
             <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='wantToRead')} shelf={'wantToRead'}/>
             <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='read')} shelf={'Read'}/>
+          </div>
+
+          <div className="open-search">
+            <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
           </div>
         </div>
       </div>

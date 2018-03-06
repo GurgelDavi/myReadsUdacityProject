@@ -25,9 +25,7 @@ class Bookshelf extends Component {
     myBooks:[]
   }
   render(){
-    this.props.myBooks.map((book)=>(
-      console.log(book.imageLinks)
-    ))
+
     return(
       <div className="bookshelf">
         <h2 className="bookshelf-title">{this.props.shelf}</h2>
