@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 
-class SearchResult extends Component {
+class SearchResults extends Component {
   state = {
     query:''
   }
