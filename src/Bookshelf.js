@@ -22,7 +22,7 @@ import React, {Component} from 'react'
 //shelf
 class Bookshelf extends Component {
   state = {
-    myBooks:[]
+
   }
   render(){
 
@@ -45,7 +45,7 @@ class Bookshelf extends Component {
                       <option onClick={()=>this.props.onMoveBook(book,"currentlyReading")}value="currentlyReading">Currently Reading</option>
                       <option onClick={()=>this.props.onMoveBook(book,"wantToRead")}value="wantToRead">Want to Read</option>
                       <option onClick={()=>this.props.onMoveBook(book,"read")} value="read">Read</option>
-                      <option value="none">None</option>
+                      <option onClick={()=>this.props.onMoveBook(book,"none")} value="none">None</option>
                       </select>
                     </div>
                   </div>

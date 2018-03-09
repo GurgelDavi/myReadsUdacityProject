@@ -17,9 +17,6 @@ class BooksApp extends React.Component {
       this.setState({books:books})
     })
   }
-  updateQuery = (query) => {
-    this.setState({ query:query.trim() })
-  }
   removeBook = (book) => {
     this.setState(state=>({
       books: state.books.filter((b) => b.id !== book.id)
@@ -83,8 +80,8 @@ class BooksApp extends React.Component {
         </div>
       )}/>
       <Route path="/searchBook" render={()=>(
-        <div>
-          <SearchBooks/>
+        <div className="list-books">
+          <SearchBooks myBooks={this.state.books}/>
         </div>
       )}/>
       </div>
