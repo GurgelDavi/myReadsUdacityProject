@@ -2,6 +2,7 @@ import React,{Component} from 'react'
 import Bookshelf from './Bookshelf'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import {Link} from 'react-router-dom'
 
 class SearchBooks extends Component {
   state = {
@@ -36,6 +37,7 @@ class SearchBooks extends Component {
           <div className="list-books-content">
             <Bookshelf myBooks={displayedBooks} shelf={'Looking'}/>
           </div >
+          <Link className="close-search" to="/">Back to home</Link>
         </div>
       </div>
     )
