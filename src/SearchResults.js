@@ -10,4 +10,4 @@ class SearchResults extends Component {
     )
   }
 }
-export default SearchBooks
+export default SearchResults

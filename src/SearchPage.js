@@ -1,10 +1,11 @@
 import React,{Component} from 'react'
 import Bookshelf from './Bookshelf'
+import SearchResults from './SearchResults';
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
 
-class SearchBooks extends Component {
+class SearchPage extends Component {
   state = {
     query:'',
     books:[]
@@ -43,4 +44,4 @@ class SearchBooks extends Component {
     )
   }
 }
-export default SearchBooks
+export default SearchPage
