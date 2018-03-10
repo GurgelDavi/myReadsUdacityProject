@@ -22,7 +22,6 @@ import React, {Component} from 'react'
 //shelf
 class Bookshelf extends Component {
   state = {
-
   }
   render(){
 

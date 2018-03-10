@@ -1,9 +1,7 @@
 import React,{Component} from 'react'
 import Bookshelf from './Bookshelf'
-import SearchResults from './SearchResults';
-import escapeRegExp from 'escape-string-regexp'
-import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 
 class SearchPage extends Component {
   state = {
@@ -11,16 +9,18 @@ class SearchPage extends Component {
     books:[]
   }
   updateQuery = (query) =>{
-      this.setState({query:query.trim()})
+      this.setState({query:query})
+      BooksAPI.search(this.state.query).then((books)=>{
+        this.setState({books:books})
+      })
   }
+  moveBook = (book,shelf) => {
+    this.props.onMoveBook(book,shelf)
+    console.log('movingBook');
+  }
+
   render(){
-    let displayedBooks
-    if (this.state.query){
-      const match = new RegExp(escapeRegExp(this.state.query), 'i')
-      displayedBooks = this.props.myBooks.filter((book) => match.test(book.title))
-    }else {
-      displayedBooks = this.props.myBooks;
-    }
+
     return(
       <div>
         <div className="search-books-bar">
@@ -36,7 +36,7 @@ class SearchPage extends Component {
         </div>
         <div className="list-books-top">
           <div className="list-books-content">
-            <Bookshelf myBooks={displayedBooks} shelf={'Looking'}/>
+            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books} shelf={'Looking'}/>
           </div >
           <Link className="close-search" to="/">Back to home</Link>
         </div>
