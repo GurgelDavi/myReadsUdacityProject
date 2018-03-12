@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import Bookshelf from './Bookshelf'
+import escapeRegExp from 'escape-string-regexp'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
@@ -34,6 +35,23 @@ class SearchPage extends Component {
   }
   moveBook = (book,shelf) => {
     this.props.onMoveBook(book,shelf)
+    this.setState(state=>({
+      myBooksOnDisplay: state.myBooksOnDisplay.filter((b) => b.id !== book.id),
+      queryResults:state.queryResults.filter((b) => b.id !== book.id)
+
+    }))
+    if (shelf!=='none')
+    {
+        this.setState((state)=>({
+          myBooksOnDisplay: state.myBooksOnDisplay.concat(book)
+        }))
+
+    }else {
+      this.setState((state)=>({
+        queryResults: state.queryResults.concat(book)
+      }))
+    }
+    console.log('moved');
   }
   componentDidMount(){
     BooksAPI.getAll().then((myBooks)=>{
@@ -42,6 +60,16 @@ class SearchPage extends Component {
   }
 
   render(){
+    let myBooksOnDisplay
+    let queryResults
+    if (this.state.query) {
+      const match = new RegExp(escapeRegExp(this.state.query),'i')
+      myBooksOnDisplay = this.state.myBooksOnDisplay.filter((book)=>match.test(book.title))
+      queryResults = this.state.queryResults.filter((book)=>match.test(book.title))
+    } else {
+      myBooksOnDisplay = []
+      queryResults = []
+    }
 
     return(
       <div className="search-books">
@@ -58,8 +86,8 @@ class SearchPage extends Component {
         </div>
         <div className="search-books-results">
           <div className="list-books-content">
-            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.myBooksOnDisplay} shelf={'On My Colection'}/>
-            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.queryResults} shelf={'Looking'}/>
+            <Bookshelf onMoveBook={this.moveBook} myBooks={myBooksOnDisplay} shelf={'On My Colection'}/>
+            <Bookshelf onMoveBook={this.moveBook} myBooks={queryResults} shelf={'Looking'}/>
           </div >
           <Link className="close-search" to="/">Back to home</Link>
         </div>
