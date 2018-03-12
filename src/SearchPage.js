@@ -6,23 +6,45 @@ import * as BooksAPI from './BooksAPI'
 class SearchPage extends Component {
   state = {
     query:'',
-    books:[]
+    queryResults:[],
+    myBooks:[],
+    myBooksOnDisplay:[]
   }
   updateQuery = (query) =>{
       this.setState({query:query})
       BooksAPI.search(this.state.query).then((books)=>{
-        this.setState({books:books})
+        //interseção entre livros já na biblioteca
+        let interse =[]
+        let dif = books
+        for (const book of books) {
+          for ( const b of this.state.myBooks) {
+            if (b.id === book.id){
+              interse.push(book);
+              dif = dif.filter((b) => (b.id!==book.id))
+            }
+          }
+        }
+        this.setState({myBooksOnDisplay:interse})
+
+        //Excluindo livros repetidos nos resultados
+
+        this.setState({queryResults:dif})
+
       })
   }
   moveBook = (book,shelf) => {
     this.props.onMoveBook(book,shelf)
-    console.log('movingBook');
+  }
+  componentDidMount(){
+    BooksAPI.getAll().then((myBooks)=>{
+      this.setState({myBooks:myBooks})
+    })
   }
 
   render(){
 
     return(
-      <div>
+      <div className="search-books">
         <div className="search-books-bar">
             <div className="search-books-input-wrapper">
               <input
@@ -34,9 +56,10 @@ class SearchPage extends Component {
               />
             </div>
         </div>
-        <div className="list-books-top">
+        <div className="search-books-results">
           <div className="list-books-content">
-            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books} shelf={'Looking'}/>
+            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.myBooksOnDisplay} shelf={'On My Colection'}/>
+            <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.queryResults} shelf={'Looking'}/>
           </div >
           <Link className="close-search" to="/">Back to home</Link>
         </div>
