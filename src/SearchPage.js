@@ -64,8 +64,8 @@ class SearchPage extends Component {
     let queryResults
     if (this.state.query) {
       const match = new RegExp(escapeRegExp(this.state.query),'i')
-      myBooksOnDisplay = this.state.myBooksOnDisplay.filter((book)=>match.test(book.title))
-      queryResults = this.state.queryResults.filter((book)=>match.test(book.title))
+      myBooksOnDisplay = this.state.myBooksOnDisplay
+      queryResults = this.state.queryResults
     } else {
       myBooksOnDisplay = []
       queryResults = []
