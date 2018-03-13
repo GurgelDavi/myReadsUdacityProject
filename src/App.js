@@ -17,11 +17,7 @@ class BooksApp extends React.Component {
       this.setState({books:books})
     })
   }
-  removeBook = (book) => {
-    this.setState(state=>({
-      books: state.books.filter((b) => b.id !== book.id)
-    }))
-  }
+
   moveBook = (book,shelf) => {
     this.setState(state=>({
       books: state.books.filter((b) => b.id !== book.id)
