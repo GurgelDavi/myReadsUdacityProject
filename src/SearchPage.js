@@ -13,7 +13,7 @@ class SearchPage extends Component {
   }
   updateQuery = (query) =>{
       this.setState({query:query})
-      BooksAPI.search(this.state.query).then((books)=>{
+        BooksAPI.search(this.state.query).then((books)=>{
         //intersction between books in collection X results
         let interse =[]
         let dif = books
