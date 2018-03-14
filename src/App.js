@@ -12,43 +12,20 @@ class BooksApp extends React.Component {
     books :[],
     showSearchPage: true
   }
-  componentDidMount(){
+   componentDidMount(){
     BooksAPI.getAll().then((books)=>{
       this.setState({books:books})
     })
   }
 
   moveBook = (book,shelf) => {
+    console.log(book.title + ' to ' + shelf);
     this.setState(state=>({
       books: state.books.filter((b) => b.id !== book.id)
     }))
+    book.shelf = shelf
     this.setState((state)=>({
-      books: state.books.concat([
-        {
-          "id":book.id,
-          "title":book.title,
-          "authors":book.authors,
-          "imageLinks":book.imageLinks,
-          "shelf":shelf,
-          "publisher":book.publisher,
-          "publishedDate":book.publishedDate,
-          "description":book.description,
-          "industryIdentifiers":book.industryIdentifiers,
-          "readingModes":book.readingModes,
-          "pageCount":book.pageCount,
-          "printType":book.printType,
-          "categories":book.categories,
-          "averageRating":book.averageRating,
-          "ratingsCount":book.ratingsCount,
-          "maturityRating":book.maturityRating,
-          "allowAnonLogging":book.allowAnonLogging,
-          "contentVersion":book.contentVersion,
-          "imageLinks":book.imageLinks,
-          "languagepreviewLink":book.languagepreviewLink,
-          "infoLink":book.infoLink,
-          "canonicalVolumeLink":book.canonicalVolumeLink
-        }
-      ])
+      books: state.books.concat(book)
     }))
     BooksAPI.update(book,shelf)
   }

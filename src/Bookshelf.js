@@ -15,12 +15,11 @@ function Bookshelf (props) {
                       }}>
                     </div>
                     <div className="book-shelf-changer">
-                      <select>
-                      <option value="none" disabled>Move to...</option>
-                      <option onClick={()=>props.onMoveBook(book,"currentlyReading")}value="currentlyReading">Currently Reading</option>
-                      <option onClick={()=>props.onMoveBook(book,"wantToRead")}value="wantToRead">Want to Read</option>
-                      <option onClick={()=>props.onMoveBook(book,"read")} value="read">Read</option>
-                      <option onClick={()=>props.onMoveBook(book,"none")} value="none">None</option>
+                      <select value={book.shelf} onChange={(event)=>props.onMoveBook(book,event.target.value)}>
+                      <option value="none">None</option>
+                      <option value="currentlyReading">Currently Reading</option>
+                      <option value="wantToRead">Want to Read</option>
+                      <option value="read">Read</option>
                       </select>
                     </div>
                   </div>

@@ -7,9 +7,9 @@ import * as BooksAPI from './BooksAPI'
 class SearchPage extends Component {
   state = {
     query:'',
-    queryResults:[],//For the results
-    myBooks:[],//For myCollection
-    myBooksOnDisplay:[]//For the books in my Collection Relevants to the search
+    queryResults:[],//The results
+    myBooks:[],//The full collection of saved books
+    myBooksOnDisplay:[]//Books in my Collection Relevants to the search
   }
   updateQuery = (query) =>{
       this.setState({query:query})
@@ -20,6 +20,7 @@ class SearchPage extends Component {
         for (const book of books) {
           for ( const b of this.state.myBooks) {
             if (b.id === book.id){
+              book.shelf=b.shelf;
               interse.push(book);
               dif = dif.filter((b) => (b.id!==book.id))
             }
@@ -38,13 +39,14 @@ class SearchPage extends Component {
     //updating visual diplay of the books
     this.setState(state=>({
       myBooksOnDisplay: state.myBooksOnDisplay.filter((b) => b.id !== book.id),
-      queryResults:state.queryResults.filter((b) => b.id !== book.id)
-
+      queryResults:state.queryResults.filter((b) => b.id !== book.id),
+      myBooks: state.myBooks.filter((b) => b.id !== book.id)
     }))
     if (shelf!=='none')
     {
         this.setState((state)=>({
-          myBooksOnDisplay: state.myBooksOnDisplay.concat(book)
+          myBooksOnDisplay: state.myBooksOnDisplay.concat(book),
+          myBooks: state.myBooks.concat(book)
         }))
 
     }else {
