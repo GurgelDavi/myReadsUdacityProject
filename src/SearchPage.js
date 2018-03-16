@@ -27,9 +27,7 @@ class SearchPage extends Component {
           }
         }
         this.setState({myBooksOnDisplay:interse})
-
         //Excluding books displayed in my collection
-
         this.setState({queryResults:dif})
 
       })
@@ -44,11 +42,10 @@ class SearchPage extends Component {
     }))
     if (shelf!=='none')
     {
-        this.setState((state)=>({
-          myBooksOnDisplay: state.myBooksOnDisplay.concat(book),
-          myBooks: state.myBooks.concat(book)
-        }))
-
+      this.setState((state)=>({
+        myBooksOnDisplay: state.myBooksOnDisplay.concat(book),
+        myBooks: state.myBooks.concat(book)
+      }))
     }else {
       this.setState((state)=>({
         queryResults: state.queryResults.concat(book)
@@ -65,17 +62,13 @@ class SearchPage extends Component {
 
   render(){
     //ensuring the correct display from the search
-    let myBooksOnDisplay
-    let queryResults
+    let myBooksOnDisplay =[]
+    let queryResults = []
     if (this.state.query) {
       //const match = new RegExp(escapeRegExp(this.state.query),'i') was here for more specific matches
       myBooksOnDisplay = this.state.myBooksOnDisplay
       queryResults = this.state.queryResults
-    } else {
-      myBooksOnDisplay = []
-      queryResults = []
     }
-
     return(
       <div className="search-books">
         <div className="search-books-bar">
