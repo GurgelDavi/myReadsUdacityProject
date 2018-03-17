@@ -15,42 +15,38 @@ class SearchPage extends Component {
       this.setState({query:query})
         BooksAPI.search(this.state.query).then((books)=>{
         //intersction between books in collection X results
-        let interse =[]
-        let dif = books
-        for (const book of books) {
-          for ( const b of this.state.myBooks) {
-            if (b.id === book.id){
-              book.shelf=b.shelf;
-              interse.push(book);
-              dif = dif.filter((b) => (b.id!==book.id))
+        if (books) {
+          let interse =[]
+          for (const book of books) {
+            for ( const b of this.state.myBooks) {
+              if (b.id === book.id){
+                book.shelf=b.shelf;
+                interse.push(book);
+                books = books.filter((b) => (b.id!==book.id))
+              }
             }
           }
+          this.setState({myBooksOnDisplay:interse})
+          //Excluding books displayed in my collection
+          this.setState({queryResults:books})
         }
-        this.setState({myBooksOnDisplay:interse})
-        //Excluding books displayed in my collection
-        this.setState({queryResults:dif})
-
       })
   }
   moveBook = (book,shelf) => {
     this.props.onMoveBook(book,shelf)//Sending the request to the main app.js Component
     //updating visual diplay of the books
-    this.setState(state=>({
-      myBooksOnDisplay: state.myBooksOnDisplay.filter((b) => b.id !== book.id),
-      queryResults:state.queryResults.filter((b) => b.id !== book.id),
-      myBooks: state.myBooks.filter((b) => b.id !== book.id)
-    }))
-    if (shelf!=='none')
-    {
-      this.setState((state)=>({
+    shelf!=='none' ?
+      (this.setState((state)=>({
         myBooksOnDisplay: state.myBooksOnDisplay.concat(book),
+        queryResults:state.queryResults.filter((b) => b.id !== book.id),
         myBooks: state.myBooks.concat(book)
-      }))
-    }else {
-      this.setState((state)=>({
-        queryResults: state.queryResults.concat(book)
-      }))
-    }
+      })))
+    :
+      (this.setState((state)=>({
+        myBooksOnDisplay: state.myBooksOnDisplay.filter((b) => b.id !== book.id),
+        queryResults: state.queryResults.concat(book),
+        myBooks: state.myBooks.filter((b) => b.id !== book.id)
+      })))
   }
 
   componentDidMount(){
