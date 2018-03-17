@@ -47,12 +47,12 @@ class BooksApp extends React.Component {
               <Bookshelf onMoveBook={this.moveBook} myBooks={this.state.books.filter((book)=>book.shelf==='read')} shelf={'Read'}/>
             </div>
             <div className="open-search">
-               <Link to="/searchBook">Add a book</Link>
+               <Link to="/search">Add a book</Link>
             </div>
           </div>
         </div>
       )}/>
-      <Route path="/searchBook" render={()=>(
+      <Route path="/search" render={()=>(
         <div className="list-books">
           <SearchPage onMoveBook={this.moveBook} myBooks={this.state.books}/>
         </div>
